@@ -1,4 +1,4 @@
-<project name="Jazzy - jEdit Plugin." default="jedit-install" basedir=".">
+<project name="Jazzy - jEdit Plugin." default="build" basedir=".">
 
   <!-- set global properties for this build (directory names) -->
 
@@ -113,7 +113,7 @@
     </zip>
   </target>
   
-  <target name="test" depends="debug-compile">
+  <target name="test">
      <java classpath="%CLASSPATH%;${build}" 
            classname="${package}.${test-class}"/>
   </target>
