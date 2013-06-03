@@ -4,7 +4,14 @@
     <groupId>com.swabunga.spell</groupId>
     <artifactId>jazzy</artifactId>
     <version>0.5.3-SNAPSHOT</version>
-    
+
+    <licenses>
+        <license>
+            <name>GNU General Public License v2.0 or later</name>
+            <url>http://www.spdx.org/licenses/GPL-2.0+</url>
+        </license>
+    </licenses>    
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -20,4 +27,49 @@
             <systemPath>${basedir}/jedit.jar</systemPath>
         </dependency>
     </dependencies>
+
+    <developers>
+        <developer>
+            <name>Mindaugas Idzelis</name>
+            <email>min123 AT gmail DOT com</email>
+            <roles>
+                <role>developer</role>
+                <role>author</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Ben Galbraith</name>
+            <email>ben AT galbraiths DOT org</email>
+        </developer>
+        <developer>
+            <name>Damien Guillaume</name>
+        </developer>
+        <developer>
+            <name>Robert Gustavsson</name>
+            <email>robert AT lindesign DOT se</email>
+        </developer>
+        <developer>
+            <name>Jason Height</name>
+            <email>jheight AT chariot DOT net DOT au</email>
+        </developer>
+        <developer>
+            <name>Anthony Roy</name>
+            <email>ajr AT antroy DOT co DOT uk</email>
+        </developer>
+        <developer>
+            <name>Stig Tanggaard</name>
+        </developer>
+        <developer>
+            <name>Don Vail</name>
+        </developer>
+        <developer>
+            <name>Matthew Demerath</name>
+            <email>mdemerat AT umich DOT edu | Matthew AT Demerath DOT com</email>
+        </developer>
+        <developer>
+            <name>Tony Chan</name>
+            <email>htchan AT umich DOT edu</email>
+        </developer>
+    </developers>
+
 </project>
