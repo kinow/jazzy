@@ -71,10 +71,22 @@ public class Word implements Comparator {
    * @return The indication of equality
    */
   public boolean equals(Object o) {
-    if (o instanceof Word)  // added by bd
+    if (o != null && o instanceof Word)  // added by bd
       return(((Word)o).getWord().equals(getWord()));
     return false;
   }
+  
+    @Override
+    public int hashCode() {
+        int hash = "Word".hashCode();
+        if (word != null && word.trim().length() > 0) {
+            hash <<= 4;
+            hash ^= word.hashCode();
+        }
+        hash <<= 4;
+        hash ^= score;
+        return hash;
+    }
   
   /**
    * gets suggested spelling

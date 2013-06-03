@@ -130,7 +130,7 @@ public class SpellDictionaryDisk extends SpellDictionaryASpell {
             }
           }
         };
-        t.start();
+        t.start(); // FIXME find bugs points this as an error. And it does look weird.
       }
     } else {
       loadIndex();
