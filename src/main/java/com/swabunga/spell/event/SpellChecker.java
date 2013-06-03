@@ -23,7 +23,7 @@ import com.swabunga.spell.engine.Configuration;
 import com.swabunga.spell.engine.SpellDictionary;
 import com.swabunga.spell.engine.SpellDictionaryHashMap;
 import com.swabunga.spell.engine.Word;
-import com.swabunga.util.VectorUtility;
+import com.swabunga.spell.util.VectorUtility;
 
 import java.io.IOException;
 import java.util.*;
