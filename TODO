@@ -3,3 +3,4 @@
 - run pmd, checkstyle, findbugs, etc
 - update docs & site
 - review used data structures (important for a spell checker, dict)
+- remove the utils package (probably apache commons has most of what is in there)
