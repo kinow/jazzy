@@ -72,8 +72,7 @@ class BasicSpellCheckEvent implements SpellCheckEvent {
    * @return The text containing the context
    */
   public String getWordContext() {
-    //JMH TBD
-    return null;
+    return this.context;
   }
 
   /** Returns the start position of the misspelt word in the context
