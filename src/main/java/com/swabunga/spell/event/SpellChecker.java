@@ -525,7 +525,7 @@ public class SpellChecker {
                 // Check for capitalisation
                 if (isSupposedToBeCapitalized(word, tokenizer)) {
                     errors++;
-                    StringBuffer buf = new StringBuffer(word);
+                    StringBuilder buf = new StringBuilder(word);
                     buf.setCharAt(0, Character.toUpperCase(word.charAt(0)));
                     List<Word> suggestion = new ArrayList<Word>();
                     suggestion.add(new Word(buf.toString(), 0));
@@ -547,10 +547,10 @@ public class SpellChecker {
         while (iterator.hasNext()) {
             Word word = iterator.next();
             String suggestion = word.getWord();
-            StringBuffer stringBuffer = new StringBuffer(suggestion);
-            stringBuffer.setCharAt(0,
+            StringBuilder StringBuilder = new StringBuilder(suggestion);
+            StringBuilder.setCharAt(0,
                     Character.toUpperCase(suggestion.charAt(0)));
-            word.setWord(stringBuffer.toString());
+            word.setWord(StringBuilder.toString());
         }
         return suggestions;
     }

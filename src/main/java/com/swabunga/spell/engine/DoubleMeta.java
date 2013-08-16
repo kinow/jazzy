@@ -195,13 +195,13 @@ public class DoubleMeta implements Transformator {
      * 
      * @param main
      */
-    private final static void MetaphAdd(StringBuffer primary, String main) {
+    private final static void MetaphAdd(StringBuilder primary, String main) {
         if (main != null) {
             primary.append(main);
         }
     }
 
-    private final static void MetaphAdd(StringBuffer primary, char main) {
+    private final static void MetaphAdd(StringBuilder primary, char main) {
         primary.append(main);
     }
 
@@ -252,7 +252,7 @@ public class DoubleMeta implements Transformator {
      * @return the result of the phonetic transformation
      */
     public final String transform(String word) {
-        StringBuffer primary = new StringBuffer(word.length() + 5);
+        StringBuilder primary = new StringBuilder(word.length() + 5);
         String in = word.toUpperCase() + "     ";
         int current = 0;
         int length = in.length();

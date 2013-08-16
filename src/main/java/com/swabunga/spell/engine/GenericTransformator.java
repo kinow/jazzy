@@ -233,7 +233,7 @@ public class GenericTransformator implements Transformator {
             return null;
 
         TransformationRule rule;
-        StringBuffer str = new StringBuffer(word.toUpperCase());
+        StringBuilder str = new StringBuilder(word.toUpperCase());
         int strLength = str.length();
         int startPos = 0, add = 1;
 
@@ -309,8 +309,8 @@ public class GenericTransformator implements Transformator {
         // "replacement expression" giving the phonetic equivalent of the
         // "match expression".
         TransformationRule rule = null;
-        StringBuffer matchExp = new StringBuffer();
-        StringBuffer replaceExp = new StringBuffer();
+        StringBuilder matchExp = new StringBuilder();
+        StringBuilder replaceExp = new StringBuilder();
         boolean start = false, end = false;
         int takeOutPart = 0, matchLength = 0;
         boolean match = true, inMulti = false;
@@ -341,7 +341,7 @@ public class GenericTransformator implements Transformator {
             }
         }
         if (replaceExp.toString().equals(REPLACEVOID)) {
-            replaceExp = new StringBuffer("");
+            replaceExp = new StringBuilder("");
             // System.out.println("Changing _ to \"\" for "+matchExp.toString());
         }
         rule = new TransformationRule(matchExp.toString(),
@@ -396,7 +396,7 @@ public class GenericTransformator implements Transformator {
          * Returns true if word from pos and forward matches the match string.
          * Precondition: wordPos+matchLength<word.length()
          */
-        public boolean isMatching(StringBuffer word, int wordPos) {
+        public boolean isMatching(StringBuilder word, int wordPos) {
             boolean matching = true, inMulti = false, multiMatch = false;
             char matchCh;
 

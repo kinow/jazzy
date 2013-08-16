@@ -70,7 +70,7 @@ public class StringWordTokenizerTest extends TestCase {
     }
 
     private static String stringValue(File inFile) {
-        StringBuffer out = new StringBuffer("");
+        StringBuilder out = new StringBuilder("");
 
         try {
             BufferedReader in = new BufferedReader(new FileReader(inFile));

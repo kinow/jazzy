@@ -202,7 +202,7 @@ public class EditDistance {
      * @return String
      */
     static protected String dumpMatrix(String src, String dest, int matrix[][]) {
-        StringBuffer s = new StringBuffer("");
+        StringBuilder s = new StringBuilder("");
 
         int cols = matrix.length - 1;
         int rows = matrix[0].length - 1;
