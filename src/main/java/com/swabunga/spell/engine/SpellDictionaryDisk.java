@@ -20,8 +20,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 /* Created by bgalbs on Jan 30, 2003 at 11:38:39 PM */
 package com.swabunga.spell.engine;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
 
 /**
  * An implementation of <code>SpellDictionary</code> that doesn't cache any
@@ -52,7 +67,7 @@ public class SpellDictionaryDisk extends SpellDictionaryASpell {
     private File base;
     private File words;
     private File db;
-    private Map index;
+    private Map<String, Object[]> index;
     /**
      * The flag indicating if the initial preparation or loading of the on disk
      * dictionary is complete.
@@ -63,7 +78,7 @@ public class SpellDictionaryDisk extends SpellDictionaryASpell {
      * used at time of creation of index to speed up determining the number of
      * words per index entry
      */
-    private List indexCodeCache = null;
+    private List<String> indexCodeCache = null;
 
     /**
      * Construct a spell dictionary on disk. The spell dictionary is created
@@ -176,8 +191,7 @@ public class SpellDictionaryDisk extends SpellDictionaryASpell {
      * @param word The word to add.
      */
     public void addWord(String word) {
-        throw new UnsupportedOperationException(
-                "addWord not yet implemented (sorry)");
+        throw new UnsupportedOperationException("addWord not yet implemented (sorry)");
     }
 
     /**
@@ -186,10 +200,10 @@ public class SpellDictionaryDisk extends SpellDictionaryASpell {
      * @param code The phonetic code common to the list of words
      * @return A list of words having the same phonetic code
      */
-    public List getWords(String code) {
-        Vector words = new Vector();
+    public List<String> getWords(String code) {
+        List<String> words = new ArrayList<String>();
 
-        int[] posLen = getStartPosAndLen(code);
+        Integer[] posLen = getStartPosAndLen(code);
         if (posLen != null) {
             try {
                 InputStream input = new FileInputStream(new File(db, FILE_DB));
@@ -203,7 +217,7 @@ public class SpellDictionaryDisk extends SpellDictionaryASpell {
                 for (int i = 0; i < lines.length; i++) {
                     String[] s = split(lines[i], ",");
                     if (s[0].equals(code))
-                        words.addElement(s[1]);
+                        words.add(s[1]);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -229,7 +243,7 @@ public class SpellDictionaryDisk extends SpellDictionaryASpell {
          * load in contents file, which indicates the files and sizes of the
          * last db build
          */
-        List contents = new ArrayList();
+        List<FileSize> contents = new ArrayList<FileSize>();
         File c = new File(db, FILE_CONTENTS);
         if (c.exists()) {
             BufferedReader reader = null;
@@ -275,7 +289,7 @@ public class SpellDictionaryDisk extends SpellDictionaryASpell {
     }
 
     private File buildSortedFile() throws FileNotFoundException, IOException {
-        List w = new ArrayList();
+        List<String> w = new ArrayList<String>();
 
         /*
          * read every single word into the list. eeek. if this causes problems,
@@ -315,7 +329,7 @@ public class SpellDictionaryDisk extends SpellDictionaryASpell {
 
     private void buildCodeDb(File sortedWords) throws FileNotFoundException,
             IOException {
-        List codeList = new ArrayList();
+        List<CodeWord> codeList = new ArrayList<CodeWord>();
 
         BufferedReader reader = new BufferedReader(new FileReader(sortedWords));
         String word;
@@ -326,7 +340,7 @@ public class SpellDictionaryDisk extends SpellDictionaryASpell {
 
         Collections.sort(codeList);
 
-        List index = new ArrayList();
+        List<Object[]> index = new ArrayList<Object[]>();
 
         BufferedOutputStream out = new BufferedOutputStream(
                 new FileOutputStream(new File(db, FILE_DB)));
@@ -397,21 +411,21 @@ public class SpellDictionaryDisk extends SpellDictionaryASpell {
      * into the dictionary db file.
      */
     protected void loadIndex() throws IOException {
-        index = new HashMap();
+        index = new HashMap<String, Object[]>();
         File idx = new File(db, FILE_INDEX);
         BufferedReader reader = new BufferedReader(new FileReader(idx));
         String line;
         while ((line = reader.readLine()) != null) {
             String[] fields = split(line, ",");
-            index.put(fields[0], new int[] { Integer.parseInt(fields[1]),
+            index.put(fields[0], new Integer[] { Integer.parseInt(fields[1]),
                     Integer.parseInt(fields[2]) });
         }
         reader.close();
     }
 
-    private int[] getStartPosAndLen(String code) {
+    private Integer[] getStartPosAndLen(String code) {
         while (code.length() > 0) {
-            int[] posLen = (int[]) index.get(code);
+            Integer[] posLen = (Integer[]) index.get(code);
             if (posLen == null) {
                 code = code.substring(0, code.length() - 1);
             } else {
@@ -421,9 +435,9 @@ public class SpellDictionaryDisk extends SpellDictionaryASpell {
         return null;
     }
 
-    private String getIndexCode(String code, List codes) {
+    private String getIndexCode(String code, List<CodeWord> codes) {
         if (indexCodeCache == null)
-            indexCodeCache = new ArrayList();
+            indexCodeCache = new ArrayList<String>();
 
         if (code.length() <= 1)
             return code;
@@ -441,13 +455,12 @@ public class SpellDictionaryDisk extends SpellDictionaryASpell {
             int count = 0;
             for (int i = 0; i < codes.size();) {
                 if (i == 0) {
-                    i = Collections.binarySearch(codes, new CodeWord(thisCode,
-                            ""));
+                    i = Collections.binarySearch(codes, new CodeWord(thisCode, ""));
                     if (i < 0)
                         i = 0;
                 }
 
-                CodeWord cw = (CodeWord) codes.get(i);
+                CodeWord cw = codes.get(i);
                 if (cw.getCode().startsWith(thisCode)) {
                     count++;
                     if (count > INDEX_SIZE_MAX)
@@ -482,7 +495,7 @@ public class SpellDictionaryDisk extends SpellDictionaryASpell {
         return out;
     }
 
-    private class CodeWord implements Comparable {
+    private class CodeWord implements Comparable<CodeWord> {
         private String code;
         private String word;
 
@@ -517,12 +530,12 @@ public class SpellDictionaryDisk extends SpellDictionaryASpell {
             return word.hashCode();
         }
 
-        public int compareTo(Object o) {
-            return code.compareTo(((CodeWord) o).getCode());
+        public int compareTo(CodeWord o) {
+            return code.compareTo(o.getCode());
         }
     }
 
-    private class FileSize {
+    protected class FileSize {
         private String filename;
         private long size;
 

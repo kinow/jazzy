@@ -56,7 +56,7 @@ public interface SpellCheckEvent {
      * 
      * @return A list of words phonetically close to the misspelt word
      */
-    public List getSuggestions();
+    public List<com.swabunga.spell.engine.Word> getSuggestions();
 
     /**
      * Returns the currently misspelt word

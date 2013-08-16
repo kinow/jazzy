@@ -19,8 +19,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 package com.swabunga.spell.engine;
 
-import java.io.*;
-import java.util.*;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Another implementation of <code>SpellDictionary</code> that doesn't cache any
@@ -129,7 +134,7 @@ public class SpellDictionaryDichoDisk extends SpellDictionaryASpell {
      * Search the dictionary file for the words corresponding to the code within
      * positions p1 - p2
      */
-    private LinkedList dichoFind(String code, long p1, long p2)
+    private List<String> dichoFind(String code, long p1, long p2)
             throws IOException {
         // System.out.println("dichoFind("+code+","+p1+","+p2+")");
         long pm = (p1 + p2) / 2;
@@ -157,8 +162,8 @@ public class SpellDictionaryDichoDisk extends SpellDictionaryASpell {
         else if (comp > 0)
             return (dichoFind(code, pm2, p2));
         else {
-            LinkedList l1 = dichoFind(code, p1, pm - 1);
-            LinkedList l2 = dichoFind(code, pm2, p2);
+            List<String> l1 = dichoFind(code, p1, pm - 1);
+            List<String> l2 = dichoFind(code, pm2, p2);
             String word = l.substring(istar + 1);
             l1.add(word);
             l1.addAll(l2);
@@ -166,10 +171,10 @@ public class SpellDictionaryDichoDisk extends SpellDictionaryASpell {
         }
     }
 
-    private LinkedList seqFind(String code, long p1, long p2)
+    private List<String> seqFind(String code, long p1, long p2)
             throws IOException {
         // System.out.println("seqFind("+code+","+p1+","+p2+")");
-        LinkedList list = new LinkedList();
+        List<String> list = new LinkedList<String>();
         dictFile.seek(p1);
         while (dictFile.getFilePointer() < p2) {
             String l;
@@ -216,15 +221,15 @@ public class SpellDictionaryDichoDisk extends SpellDictionaryASpell {
      * @param code The phonetic code common to the list of words
      * @return A list of words having the same phonetic code
      */
-    public List getWords(String code) {
+    public List<String> getWords(String code) {
         // System.out.println("getWords("+code+")");
-        LinkedList list;
+        List<String> list;
         try {
             list = dichoFind(code, 0, dictFile.length() - 1);
             // System.out.println(list);
         } catch (IOException ex) {
             System.err.println("IOException: " + ex.getMessage());
-            list = new LinkedList();
+            list = new LinkedList<String>();
         }
         return list;
     }

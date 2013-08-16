@@ -69,7 +69,8 @@ public class JavaWordFinder extends AbstractWordFinder {
 
         currentWord.copy(nextWord);
 
-        int current = sentenceIterator.current();
+        //TODO: int current = sentenceIterator.current();
+        sentenceIterator.current();
         setSentenceIterator(currentWord);
 
         int i = currentWord.getEnd();

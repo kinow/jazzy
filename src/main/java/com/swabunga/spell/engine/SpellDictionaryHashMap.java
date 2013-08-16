@@ -24,10 +24,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 package com.swabunga.spell.engine;
 
-import java.io.*;
-import java.util.Hashtable;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Vector;
+import java.util.Map;
 
 /**
  * The SpellDictionaryHashMap holds the dictionary
@@ -56,7 +63,7 @@ public class SpellDictionaryHashMap extends SpellDictionaryASpell {
      * doublemeta code. The map entry contains a LinkedList of words that have
      * the same double meta code.
      */
-    protected Hashtable mainDictionary = new Hashtable(INITIAL_CAPACITY);
+    protected Map<String, List<String>> mainDictionary = new HashMap<String, List<String>>(INITIAL_CAPACITY);
 
     /** Holds the dictionary file for appending */
     private File dictFile = null;
@@ -263,12 +270,12 @@ public class SpellDictionaryHashMap extends SpellDictionaryASpell {
      */
     protected void putWord(String word) {
         String code = getCode(word);
-        Vector list = (Vector) mainDictionary.get(code);
+        List<String> list = mainDictionary.get(code);
         if (list != null) {
-            list.addElement(word);
+            list.add(word);
         } else {
-            list = new Vector();
-            list.addElement(word);
+            list = new ArrayList<String>();
+            list.add(word);
             mainDictionary.put(code, list);
         }
     }
@@ -282,7 +289,7 @@ public class SpellDictionaryHashMap extends SpellDictionaryASpell {
     protected void putWordUnique(String word) {
 
         String code = getCode(word);
-        Vector list = (Vector) mainDictionary.get(code);
+        List<String> list = mainDictionary.get(code);
 
         if (list != null) {
 
@@ -290,19 +297,19 @@ public class SpellDictionaryHashMap extends SpellDictionaryASpell {
 
             for (int i = 0; i < list.size(); i++) {
 
-                if (word.equalsIgnoreCase((String) list.elementAt(i))) {
+                if (word.equalsIgnoreCase((String) list.get(i))) {
                     isAlready = true;
                     break;
                 }
             }
 
             if (!isAlready)
-                list.addElement(word);
+                list.add(word);
 
         } else {
 
-            list = new Vector();
-            list.addElement(word);
+            list = new ArrayList<String>();
+            list.add(word);
             mainDictionary.put(code, list);
 
         }
@@ -311,11 +318,11 @@ public class SpellDictionaryHashMap extends SpellDictionaryASpell {
     /**
      * Returns a list of strings (words) for the code.
      */
-    public List getWords(String code) {
+    public List<String> getWords(String code) {
         // Check the main dictionary.
-        Vector mainDictResult = (Vector) mainDictionary.get(code);
+        List<String> mainDictResult = mainDictionary.get(code);
         if (mainDictResult == null)
-            return new Vector();
+            return new ArrayList<String>();
         return mainDictResult;
     }
 
@@ -324,7 +331,7 @@ public class SpellDictionaryHashMap extends SpellDictionaryASpell {
      * list.
      */
     public boolean isCorrect(String word) {
-        List possible = getWords(getCode(word));
+        List<String> possible = getWords(getCode(word));
         if (possible.contains(word))
             return true;
         // JMH should we always try the lowercase version. If I dont then

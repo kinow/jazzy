@@ -30,7 +30,7 @@ import java.util.List;
 class BasicSpellCheckEvent implements SpellCheckEvent {
 
     /** The list holding the suggested Word objects for the misspelt word */
-    private List suggestions;
+    private List<com.swabunga.spell.engine.Word> suggestions;
     /** The misspelt word */
     private String invalidWord;
     /** The action to be done when the event returns */
@@ -50,7 +50,7 @@ class BasicSpellCheckEvent implements SpellCheckEvent {
      * @param tokenizer The reference to the tokenizer that caused this event to
      *            fire.
      */
-    public BasicSpellCheckEvent(String invalidWord, List suggestions,
+    public BasicSpellCheckEvent(String invalidWord, List<com.swabunga.spell.engine.Word> suggestions,
             WordTokenizer tokenizer) {
         this.invalidWord = invalidWord;
         this.suggestions = suggestions;
@@ -63,7 +63,7 @@ class BasicSpellCheckEvent implements SpellCheckEvent {
      * 
      * @return A list of words phonetically close to the misspelt word
      */
-    public List getSuggestions() {
+    public List<com.swabunga.spell.engine.Word> getSuggestions() {
         return suggestions;
     }
 

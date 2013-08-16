@@ -23,13 +23,14 @@ import java.util.Iterator;
 import java.util.List;
 
 public class VectorUtility {
-    public static List addAll(List dest, List src) {
+    public static List<Object> addAll(List<Object> dest, List<Object> src) {
         return addAll(dest, src, true);
     }
 
-    public static List addAll(List dest, List src, boolean allow_duplicates) {
-        for (Iterator e = src.iterator(); e.hasNext();) {
-            Object o = e.next();
+    public static <T> List<T> addAll(List<T> dest, List<T> src,
+            boolean allow_duplicates) {
+        for (Iterator<T> e = src.iterator(); e.hasNext();) {
+            T o = e.next();
             if (allow_duplicates || !dest.contains(o))
                 dest.add(o);
         }

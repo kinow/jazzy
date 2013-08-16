@@ -19,18 +19,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 package com.swabunga.spell.examples;
 
-import com.swabunga.spell.engine.SpellDictionary;
-import com.swabunga.spell.engine.SpellDictionaryHashMap;
-import com.swabunga.spell.event.SpellCheckEvent;
-import com.swabunga.spell.event.SpellCheckListener;
-import com.swabunga.spell.event.SpellChecker;
-import com.swabunga.spell.event.StringWordTokenizer;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.util.Iterator;
 import java.util.List;
+
+import com.swabunga.spell.engine.SpellDictionary;
+import com.swabunga.spell.engine.SpellDictionaryHashMap;
+import com.swabunga.spell.engine.Word;
+import com.swabunga.spell.event.SpellCheckEvent;
+import com.swabunga.spell.event.SpellCheckListener;
+import com.swabunga.spell.event.SpellChecker;
+import com.swabunga.spell.event.StringWordTokenizer;
 
 /**
  * This class shows an example of how to use the spell checking capability.
@@ -68,10 +69,10 @@ public class SpellCheckExample implements SpellCheckListener {
     }
 
     public void spellingError(SpellCheckEvent event) {
-        List suggestions = event.getSuggestions();
+        List<Word> suggestions = event.getSuggestions();
         if (suggestions.size() > 0) {
             System.out.println("MISSPELT WORD: " + event.getInvalidWord());
-            for (Iterator suggestedWord = suggestions.iterator(); suggestedWord
+            for (Iterator<Word> suggestedWord = suggestions.iterator(); suggestedWord
                     .hasNext();) {
                 System.out.println("\tSuggested Word: " + suggestedWord.next());
             }

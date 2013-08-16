@@ -23,6 +23,7 @@ package com.swabunga.spell.event;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A word finder for TeX and LaTeX documents, which searches text for sequences
@@ -39,8 +40,8 @@ public class TeXWordFinder extends AbstractWordFinder {
     // {{{ ~ Instance/static variables
     // ...............................................
 
-    private boolean IGNORE_COMMENTS = true;
-    private HashSet user_defined_ignores = new HashSet();
+    private boolean ignoreComments = true;
+    private Set<String> user_defined_ignores = new HashSet<String>();
     private int regex_user_defined_ignores = STRING_EXPR;
     /**
      * A type where string expressions are used to define expression to ignore
@@ -176,9 +177,17 @@ public class TeXWordFinder extends AbstractWordFinder {
      * @param regex is an integer specifying the type of expression to use. e.g.
      *            REG_EXPR, STRING_EXPR.
      */
-    public void addUserDefinedIgnores(Collection expressions, int regex) {
+    public void addUserDefinedIgnores(Collection<String> expressions, int regex) {
         user_defined_ignores.addAll(expressions);
         regex_user_defined_ignores = regex;
+    }
+    
+    public int getRegexUserDefinedIgnores() {
+        return this.regex_user_defined_ignores;
+    }
+    
+    public Collection<?> getExpressions() {
+        return this.user_defined_ignores;
     }
 
     private int ignoreUserDefined(int i) {
@@ -191,7 +200,11 @@ public class TeXWordFinder extends AbstractWordFinder {
      * @param ignore an indication if comments content is to be ignored
      */
     public void setIgnoreComments(boolean ignore) {
-        IGNORE_COMMENTS = ignore;
+        ignoreComments = ignore;
+    }
+    
+    public boolean isIgnoreComments() {
+        return this.ignoreComments;
     }
     // }}}
 }

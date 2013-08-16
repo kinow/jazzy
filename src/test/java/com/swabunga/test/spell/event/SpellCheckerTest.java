@@ -19,24 +19,40 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 package com.swabunga.test.spell.event;
 
-import junit.framework.*;
-import junit.textui.*;
-import com.swabunga.spell.event.*;
-import com.swabunga.spell.engine.*;
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
-public class SpellCheckerTester extends TestCase implements SpellCheckListener {
+import org.junit.After;
+import org.junit.Before;
+
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+import junit.textui.TestRunner;
+
+import com.swabunga.spell.engine.SpellDictionaryHashMap;
+import com.swabunga.spell.event.FileWordTokenizer;
+import com.swabunga.spell.event.SpellCheckEvent;
+import com.swabunga.spell.event.SpellCheckListener;
+import com.swabunga.spell.event.SpellChecker;
+import com.swabunga.spell.event.TeXWordFinder;
+
+public class SpellCheckerTest extends TestCase implements SpellCheckListener {
 
     SpellChecker checker;
-    ArrayList misspelled;
+    List<String> misspelled;
 
-    public SpellCheckerTester(String name) {
+    public SpellCheckerTest(String name) {
         super(name);
     }
 
-    protected void setUp() {
-        File dict = new File("dict/english.0");
+    @Before
+    public void setUp() {
+        File dict = new File(SpellCheckerTest.class.getResource(
+                "/dict/en_US/english.0").getFile());
         try {
             checker = new SpellChecker(new SpellDictionaryHashMap(dict));
         } catch (FileNotFoundException e) {
@@ -45,21 +61,22 @@ public class SpellCheckerTester extends TestCase implements SpellCheckListener {
             System.err.println("IO problem: " + ex);
         }
         FileWordTokenizer texTok = new FileWordTokenizer(new File(
-                "src/com/swabunga/test/spell/event/test.tex"),
+                SpellCheckerTest.class.getResource(
+                        "/com/swabunga/test/spell/event/test.tex").getFile()),
                 new TeXWordFinder());
-        misspelled = new ArrayList();
+        misspelled = new ArrayList<String>();
 
         checker.addSpellCheckListener(this);
         checker.checkSpelling(texTok);
     }
 
+    @After
     protected void tearDown() {
         checker = null;
     }
 
     public void testTeXNext() {
-
-        Iterator it = misspelled.iterator();
+        Iterator<String> it = misspelled.iterator();
         assertEquals("Anthony", it.next());
         assertEquals("Stell", it.next());
         assertEquals("Leeds", it.next());
@@ -76,7 +93,7 @@ public class SpellCheckerTester extends TestCase implements SpellCheckListener {
 
     public static void main(String[] args) {
         // System.out.println("No tests currently written for FileWordTokenizerTester.");
-        TestRunner.run(new TestSuite(SpellCheckerTester.class));
+        TestRunner.run(new TestSuite(SpellCheckerTest.class));
     }
 
 }

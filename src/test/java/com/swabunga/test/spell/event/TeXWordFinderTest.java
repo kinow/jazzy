@@ -20,22 +20,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 package com.swabunga.test.spell.event;
 
-import junit.framework.*;
-import junit.textui.*;
-import com.swabunga.spell.event.*;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+import junit.textui.TestRunner;
 
-public class TeXWordFinderTester extends TestCase {
+import com.swabunga.spell.event.TeXWordFinder;
+import com.swabunga.spell.event.Word;
 
-    public TeXWordFinderTester(String name) {
+public class TeXWordFinderTest extends TestCase {
+
+    public TeXWordFinderTest(String name) {
         super(name);
-    }
-
-    protected void setUp() {
-
-    }
-
-    protected void tearDown() {
-
     }
 
     public void testWordFindA() {
@@ -175,7 +170,7 @@ public class TeXWordFinderTester extends TestCase {
     }
 
     public static void main(String[] args) {
-        TestRunner.run(new TestSuite(TeXWordFinderTester.class));
+        TestRunner.run(new TestSuite(TeXWordFinderTest.class));
     }
 
 }

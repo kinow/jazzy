@@ -76,7 +76,6 @@ public class FileWordTokenizer extends AbstractWordTokenizer {
     }
 
     private static String stringValue(File inFile) {
-        File stringFile = inFile;
         StringBuffer out = new StringBuffer("");
 
         try {

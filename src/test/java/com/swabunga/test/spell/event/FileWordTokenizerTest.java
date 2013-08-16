@@ -19,37 +19,44 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 package com.swabunga.test.spell.event;
 
-import junit.framework.*;
-import junit.textui.*;
-import com.swabunga.spell.event.*;
-import java.io.BufferedReader;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 
-public class StringWordTokenizerTester extends TestCase {
+import junit.framework.TestSuite;
+import junit.textui.TestRunner;
 
-    StringWordTokenizer texTok;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-    public StringWordTokenizerTester(String name) {
-        super(name);
+import com.swabunga.spell.event.FileWordTokenizer;
+import com.swabunga.spell.event.TeXWordFinder;
+
+public class FileWordTokenizerTest {
+
+    FileWordTokenizer texTok;
+
+    @Before
+    public void setUp() {
+        texTok = new FileWordTokenizer(new File(FileWordTokenizerTest.class
+                .getResource("/com/swabunga/test/spell/event/test.tex")
+                .getFile()), new TeXWordFinder());
     }
 
-    protected void setUp() {
-        texTok = new StringWordTokenizer(stringValue(new File(
-                "src/com/swabunga/test/spell/event/test.tex")),
-                new TeXWordFinder());
-    }
-
-    protected void tearDown() {
+    @After
+    public void tearDown() {
         texTok = null;
     }
 
+    @Test
     public void testRead() {
         assertTrue(!texTok.getContext().equals(""));
     }
 
-    public void testWordA() {
+    @Test
+    public void testTeXWordA() {
         assertEquals("width", texTok.nextWord());
         assertEquals("1", texTok.nextWord());
         assertEquals("1", texTok.nextWord());
@@ -61,26 +68,7 @@ public class StringWordTokenizerTester extends TestCase {
 
     public static void main(String[] args) {
         // System.out.println("No tests currently written for FileWordTokenizerTester.");
-        TestRunner.run(new TestSuite(StringWordTokenizerTester.class));
-    }
-
-    private static String stringValue(File inFile) {
-        File stringFile = inFile;
-        StringBuffer out = new StringBuffer("");
-
-        try {
-            BufferedReader in = new BufferedReader(new FileReader(inFile));
-            char[] c = new char[100];
-            int count;
-            while ((count = in.read(c, 0, c.length)) != -1) {
-                out.append(c, 0, count);
-            }
-            in.close();
-        } catch (IOException e) {
-            System.err.println("File input error trying to open "
-                    + inFile.toString() + " : " + e);
-        }
-        return out.toString();
+        TestRunner.run(new TestSuite(FileWordTokenizerTest.class));
     }
 
 }

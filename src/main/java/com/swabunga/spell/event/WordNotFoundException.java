@@ -24,6 +24,11 @@ package com.swabunga.spell.event;
  */
 public class WordNotFoundException extends RuntimeException {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -3455512205081140600L;
+    
     // ~ Constructors
     // ............................................................
 
