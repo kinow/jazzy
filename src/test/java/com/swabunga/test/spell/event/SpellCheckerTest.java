@@ -33,12 +33,12 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 
+import com.swabunga.spell.SpellChecker;
+import com.swabunga.spell.TeXWordFinder;
 import com.swabunga.spell.engine.SpellDictionaryHashMap;
-import com.swabunga.spell.event.FileWordTokenizer;
 import com.swabunga.spell.event.SpellCheckEvent;
 import com.swabunga.spell.event.SpellCheckListener;
-import com.swabunga.spell.event.SpellChecker;
-import com.swabunga.spell.event.TeXWordFinder;
+import com.swabunga.spell.tokenizer.FileWordTokenizer;
 
 public class SpellCheckerTest extends TestCase implements SpellCheckListener {
 

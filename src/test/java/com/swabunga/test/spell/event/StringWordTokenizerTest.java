@@ -28,8 +28,8 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 
-import com.swabunga.spell.event.StringWordTokenizer;
-import com.swabunga.spell.event.TeXWordFinder;
+import com.swabunga.spell.TeXWordFinder;
+import com.swabunga.spell.tokenizer.StringWordTokenizer;
 
 public class StringWordTokenizerTest extends TestCase {
 

@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-package com.swabunga.spell.event;
+package com.swabunga.spell;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,6 +30,11 @@ import com.swabunga.spell.engine.Configuration;
 import com.swabunga.spell.engine.SpellDictionary;
 import com.swabunga.spell.engine.SpellDictionaryHashMap;
 import com.swabunga.spell.engine.Word;
+import com.swabunga.spell.event.BasicSpellCheckEvent;
+import com.swabunga.spell.event.SpellCheckEvent;
+import com.swabunga.spell.event.SpellCheckListener;
+import com.swabunga.spell.tokenizer.StringWordTokenizer;
+import com.swabunga.spell.tokenizer.WordTokenizer;
 import com.swabunga.spell.util.VectorUtility;
 
 /**

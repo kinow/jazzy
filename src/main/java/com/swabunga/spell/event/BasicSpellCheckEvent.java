@@ -21,13 +21,15 @@ package com.swabunga.spell.event;
 
 import java.util.List;
 
+import com.swabunga.spell.tokenizer.WordTokenizer;
+
 /**
  * This event is fired off by the SpellChecker and is passed to the registered
  * SpellCheckListeners
  * 
  * @author Jason Height (jheight@chariot.net.au)
  */
-class BasicSpellCheckEvent implements SpellCheckEvent {
+public class BasicSpellCheckEvent implements SpellCheckEvent {
 
     /** The list holding the suggested Word objects for the misspelt word */
     private List<com.swabunga.spell.engine.Word> suggestions;

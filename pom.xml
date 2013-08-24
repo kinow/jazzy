@@ -2,10 +2,24 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>net.sf.jazzy</groupId>
-    <artifactId>jazzy-core</artifactId>
-    <version>0.5.3-SNAPSHOT</version>
+    <groupId>com.tupilabs</groupId>
+    <artifactId>jazzy</artifactId>
+    <version>0.6-SNAPSHOT</version>
 
+    <name>Jazzy</name>
+    <description>This is a fork of the jazzy dictionary</description>
+    <inceptionYear>2013</inceptionYear>
+    <organization>
+        <name>TupiLabs</name>
+        <url>http://www.tupilabs.com</url>
+    </organization>
+    
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+    
     <licenses>
         <license>
             <name>GNU General Public License v2.0 or later</name>
@@ -18,6 +32,21 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    
+    <ciManagement>
+        <system>Jenkins</system>
+        <url>http://builds.tupilabs.com/view/Paskuale/job/jazzy/</url>
+    </ciManagement>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/tupilabs/jazzy/issues</url>
+    </issueManagement>
+    
+    <scm>
+        <connection>scm:git:git://github.com/tupilabs/jazzy.git</connection>
+        <developerConnection>scm:git:git@github.com:tupilabs/jazzy.git</developerConnection>
+        <url>https://github.com/tupilabs/jazzy</url>
+    </scm>
 
     <dependencies>
         <dependency>
@@ -69,6 +98,16 @@
         <developer>
             <name>Tony Chan</name>
             <email>htchan AT umich DOT edu</email>
+        </developer>
+        <developer>
+            <email>kinow@apache.org</email>
+            <id>kinow</id>
+            <name>Bruno P. Kinoshita</name>
+            <timezone>-3</timezone>
+            <url>http://www.kinoshita.eti.br</url>
+            <roles>
+                <role>developer</role>
+            </roles>
         </developer>
     </developers>
 

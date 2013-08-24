@@ -88,7 +88,7 @@ public class DoubleMeta implements Transformator {
     private static final String[] list23 = { "UCCEE", "UCCES", "" };
     private static final String[] list24 = { "CK", "CG", "CQ", "" };
     private static final String[] list25 = { "CI", "CE", "CY", "" };
-    // DMV: used by the orininal code which returned two phonetic code, but not
+    // DMV: used by the original code which returned two phonetic code, but not
     // the current code
     // private static final String[] list26 = {
     // "CIO", "CIE", "CIA", ""
@@ -117,7 +117,7 @@ public class DoubleMeta implements Transformator {
     private static final String[] list47 = { "SCH", "" };
     private static final String[] list48 = { "ET", "" };
 
-    // DMV: used by the orininal code which returned two phonetic code, but not
+    // DMV: used by the original code which returned two phonetic code, but not
     // the current code
     // private static final String[] list49 = {
     // "IER ", ""
@@ -172,15 +172,13 @@ public class DoubleMeta implements Transformator {
     private static final String[] list94 = { "AU", "OU", "" };
     private static final String[] list95 = { "C", "X", "" };
 
-    // DMV: used by the orininal code which returned two phonetic code, but not
+    // DMV: used by the original code which returned two phonetic code, but not
     // the current code
     // private static final String[] list96 = {
     // "ZO", "ZI", "ZA", ""
     // };
 
     /**
-     * put your documentation comment here
-     * 
      * @return
      */
     private final static boolean SlavoGermanic(String in) {

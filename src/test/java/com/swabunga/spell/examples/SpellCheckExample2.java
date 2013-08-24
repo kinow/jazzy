@@ -26,13 +26,13 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
+import com.swabunga.spell.SpellChecker;
 import com.swabunga.spell.engine.SpellDictionary;
 import com.swabunga.spell.engine.SpellDictionaryHashMap;
 import com.swabunga.spell.engine.Word;
 import com.swabunga.spell.event.SpellCheckEvent;
 import com.swabunga.spell.event.SpellCheckListener;
-import com.swabunga.spell.event.SpellChecker;
-import com.swabunga.spell.event.StringWordTokenizer;
+import com.swabunga.spell.tokenizer.StringWordTokenizer;
 
 /**
  * This class shows an example of how to use the spell checking capability.

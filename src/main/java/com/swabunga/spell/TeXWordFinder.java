@@ -19,11 +19,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 //{{{ package and imports
 //:folding=explicit:
-package com.swabunga.spell.event;
+package com.swabunga.spell;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+
+import com.swabunga.spell.event.Word;
 
 /**
  * A word finder for TeX and LaTeX documents, which searches text for sequences

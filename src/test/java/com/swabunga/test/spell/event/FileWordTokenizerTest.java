@@ -31,8 +31,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.swabunga.spell.event.FileWordTokenizer;
-import com.swabunga.spell.event.TeXWordFinder;
+import com.swabunga.spell.TeXWordFinder;
+import com.swabunga.spell.tokenizer.FileWordTokenizer;
 
 public class FileWordTokenizerTest {
 
