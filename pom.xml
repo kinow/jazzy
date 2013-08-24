@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.tupilabs</groupId>
     <artifactId>jazzy</artifactId>
-    <version>0.6</version>
+    <version>0.7-SNAPSHOT</version>
 
     <name>Jazzy</name>
     <description>This is a fork of the jazzy dictionary</description>
